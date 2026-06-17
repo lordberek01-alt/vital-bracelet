@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vital Bracelet Community Hub</title>
+    <!-- Menggunakan Tailwind CSS versi terbaru -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .chat-box { height: 350px; overflow-y: auto; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans">
+
+    <!-- NAVBAR / HEADER -->
+    <nav class="bg-slate-900 border-b border-slate-800 p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-black text-cyan-400 tracking-wider">⌚ VB-HUB.ID</h1>
+            <div class="flex space-x-3">
+                <!-- SOSIAL MEDIA BUTTONS -->
+                <a href="LINK_YOUTUBE_ANDA" target="_blank" class="bg-red-600 hover:bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full transition">YouTube</a>
+                <a href="LINK_FACEBOOK_ANDA" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-3 py-1.5 rounded-full transition">Facebook</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN HUB -->
+    <main class="container mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- KOLOM KIRI & TENGAH: HUB SOSIAL MEDIA -->
+        <section class="lg:col-span-2 space-y-6">
+            <!-- PUSAT KONTEN YOUTUBE -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                <h3 class="text-md font-bold text-red-500 mb-3 flex items-center gap-2">📺 Video & Panduan Terbaru</h3>
+                <div class="aspect-video bg-black rounded-xl overflow-hidden relative border border-slate-800 group">
+                    <!-- Ganti ID video dQw4w9WgXcQ dengan ID video YouTube Anda jika ada -->
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- PUSAT EVENT KOMUNITAS & FACEBOOK -->
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                <h3 class="text-md font-bold text-blue-400 mb-3">📢 Pengumuman & Grup FB</h3>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800/50 space-y-3 text-sm">
+                    <p class="text-slate-300">Selamat datang di website komunitas! Semua aktivitas mabar Raid Battle, PVP, dan jual beli DIM/BE Memory difokuskan di Grup Facebook resmi kita.</p>
+                    <a href="LINK_FACEBOOK_ANDA" target="_blank" class="inline-block text-xs font-bold text-cyan-400 hover:underline">Kunjungi Grup Facebook Utama →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- KOLOM KANAN: LIVE FORUM CHAT UTAMA -->
+        <section class="bg-slate-900 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between shadow-2xl">
+            <div>
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+                    <h3 class="text-md font-bold text-emerald-400 flex items-center gap-2">💬 Forum Chat Live</h3>
+                    <div class="flex items-center gap-1">
+                        <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
+                        <span class="text-[11px] text-slate-400" id="user-online">12 Tamer Online</span>
+                    </div>
+                </div>
+
+                <!-- TAMPILAN PESAN CHAT -->
+                <div class="chat-box space-y-3 pr-1 text-xs" id="box-chat">
+                    <!-- Pesan otomatis dimuat di sini -->
+                </div>
+            </div>
+
+            <!-- INPUT KIRIM CHAT -->
+            <div class="mt-4 pt-3 border-t border-slate-800">
+                <div class="mb-2 flex gap-2">
+                    <input type="text" id="username" placeholder="Nama Tamer..." class="w-1/3 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-[11px] text-cyan-400 focus:outline-none focus:border-cyan-500" value="Tamer_Newbie">
+                    <span class="text-[10px] text-slate-500 flex items-center">← Atur nama Anda</span>
+                </div>
+                <form id="form-chat" class="flex gap-2">
+                    <input type="text" id="input-pesan" placeholder="Ketik pesan komunitas..." class="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500" required autocomplete="off">
+                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl text-xs transition">Kirim</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 text-[10px] text-slate-600 border-t border-slate-900">
+        <p>&copy; 2026 Vital Bracelet Hub. Didukung oleh YouTube & Facebook Community.</p>
+    </footer>
+
+    <!-- LOGIKA JAVASCRIPT FORUM CHAT -->
+    <script>
+        const boxChat = document.getElementById('box-chat');
+        const formChat = document.getElementById('form-chat');
+        const inputPesan = document.getElementById('input-pesan');
+        const username = document.getElementById('username');
+        const userOnline = document.getElementById('user-online');
+
+        // Simulasi jumlah tamer online acak agar hidup
+        userOnline.innerText = `${Math.floor(Math.random() * 20) + 8} Tamer Online`;
+
+        // Database chat lokal di browser
+        let daftarChat = JSON.parse(localStorage.getItem('chats_vb')) || [
+            { nama: "Admin_Agumon", teks: "Halo! Selamat datang di chat hub Vital Bracelet!", waktu: "09:00" },
+            { nama: "V_Tamer", teks: "Ada yang lagi push Vital Value pagi ini?", waktu: "09:12" }
+        ];
+
+        function tampilkanChat() {
+            boxChat.innerHTML = '';
+            daftarChat.forEach(c => {
+                const item = document.createElement('div');
+                item.className = "bg-slate-950 p-2 rounded-xl border border-slate-800/40";
+                item.innerHTML = `
+                    <div class="flex justify-between items-center mb-0.5">
+                        <span class="font-bold text-cyan-400">${c.nama}</span>
+                        <span class="text-[9px] text-slate-500">${c.waktu}</span>
+                    </div>
+                    <p class="text-slate-300">${c.teks}</p>
+                `;
+                boxChat.appendChild(item);
+            });
+            boxChat.scrollTop = boxChat.scrollHeight;
+        }
+
+        formChat.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const waktuSekarang = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            
+            daftarChat.push({
+                nama: username.value.trim() || "Tamer_Anonim",
+                teks: inputPesan.value.trim(),
+                waktu: waktuSekarang
+            });
+
+            localStorage.setItem('chats_vb', JSON.stringify(daftarChat));
+            tampilkanChat();
+            inputPesan.value = '';
+        });
+
+        tampilkanChat();
+    </script>
+</body>
+</html>
